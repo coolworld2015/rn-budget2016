@@ -102,6 +102,7 @@ class UserDetails extends Component {
           fontSize: 24,
       		textAlign: 'center',
       		marginTop: 10,
+          fontWeight: "bold"
           }}>
       		{this.state.name}
       </Text>
