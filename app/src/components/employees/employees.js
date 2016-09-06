@@ -16,9 +16,9 @@ import {
     TextInput
 } from 'react-native';
 
-import PhoneDetails from './phoneDetails';
+import EmployeeDetails from './employeeDetails';
 
-class PhoneSearchResults extends Component {
+class Employees extends Component {
     constructor(props){
         super(props);
 
@@ -26,34 +26,30 @@ class PhoneSearchResults extends Component {
             rowHasChanged: (r1, r2) => r1 != r2
         });
 
-        var items = [];
         this.state = {
-            dataSource: ds.cloneWithRows(items),
-            searchQuery: props.searchQuery,
+            dataSource: ds.cloneWithRows([]),
             showProgress: true,
-						resultsCount: 0
+			      resultsCount: 0
         };
 
-      	this.findByPhone();
+      	this.getPhones();
     }
 
-    findByPhone(){
-       fetch('http://ui-base.herokuapp.com/api/items/findByPhone/'
-             + this.state.searchQuery, {
+    getPhones(){
+       fetch('http://ui-budget.herokuapp.com/api/employees/get', {
             method: 'get',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             }
           })
-          .then((response)=> response.json())
-          .then((responseData)=> {
-             this.setState({
-               dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort)),
-               resultsCount: responseData.length,
-               responseData: responseData.sort(this.sort)
-             });
-
+ 				.then((response)=> response.json())
+        .then((responseData)=> {
+           this.setState({
+             dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort)),
+             resultsCount: responseData.length,
+             responseData: responseData.sort(this.sort)
+           })
        })
          .catch((error)=> {
              this.setState({
@@ -80,12 +76,8 @@ class PhoneSearchResults extends Component {
 
     pressRow(rowData){
         this.props.navigator.push({
-            title: rowData.trackName,
-            component: PhoneDetails,
-            rightButtonTitle: 'Cancel',
-            onRightButtonPress: () => {
-                this.props.navigator.pop()
-            },
+            title: rowData.name,
+            component: EmployeeDetails,
             passProps: {
                 pushEvent: rowData
             }
@@ -108,11 +100,22 @@ class PhoneSearchResults extends Component {
                 backgroundColor: '#fff'
             }}>
               <Text style={{backgroundColor: '#fff'}}>
-                  {rowData.name} - {rowData.phone}
+                  {rowData.name}
               </Text>
             </View>
           </TouchableHighlight>
         );
+    }
+
+    refreshData(event){
+      if (event.nativeEvent.contentOffset.y <= -100) {
+
+        this.setState({
+            showProgress: true,
+            resultsCount: event.nativeEvent.contentOffset.y
+        });
+        setTimeout(() => {this.getPhones()}, 300);
+      }
     }
 
     render(){
@@ -136,50 +139,51 @@ class PhoneSearchResults extends Component {
             </View>
         );
       }
-      return (
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={{marginTop: 60}}>
-          <TextInput style={{
-              height: 45,
-              marginTop: 5,
-              padding: 5,
-              backgroundColor: 'white',
-              borderWidth: 1,
-              borderColor: 'lightgray',
-              borderRadius: 0,
-              }}
-          onChangeText={(text)=> {
-              var arr = [].concat(this.state.responseData);
-              var items = arr.filter((el) => el.phone.indexOf(text) != -1);
-              this.setState({
-                 dataSource: this.state.dataSource.cloneWithRows(items),
-                 resultsCount: items.length,
-              })
-            }}
-            placeholder="Search">
-          </TextInput>
+        return (
+          <View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{marginTop: 60}}>
+				<TextInput style={{
+					  height: 45,
+					  marginTop: 4,
+					  padding: 5,
+					  backgroundColor: 'white',
+					  borderWidth: 3,
+					  borderColor: 'lightgray',
+					  borderRadius: 0,
+					}}
+					onChangeText={(text)=> {
+						var arr = [].concat(this.state.responseData);
+						var items = arr.filter((el) => el.phone.indexOf(text) != -1);
+						this.setState({
+						   dataSource: this.state.dataSource.cloneWithRows(items),
+						   resultsCount: items.length,
+						})
+					}}
+				  placeholder="Search">
+				</TextInput>
 
           {errorCtrl}
 
-          </View>
+            </View>
 
-          <ScrollView
-              style={{marginTop: 0, marginBottom: 0}}>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRow.bind(this)}
-            />
-          </ScrollView>
+            <ScrollView
+                onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}
+                style={{marginTop: 0, marginBottom: 0}}>
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRow.bind(this)}
+              />
+    				</ScrollView>
 
-          <View style={{marginBottom: 49}}>
-            <Text style={styles.countFooter}>
-              {this.state.resultsCount} entries were found.
-            </Text>
-          </View>
+            <View style={{marginBottom: 49}}>
+							<Text style={styles.countFooter}>
+              	{this.state.resultsCount} entries were found.
+              </Text>
+            </View>
 
-        </View>
-    );
-  }
+  			  </View>
+      );
+	}
 }
 
 const styles = StyleSheet.create({
@@ -263,4 +267,4 @@ const styles = StyleSheet.create({
     }
 });
 
-module.exports = PhoneSearchResults;
+module.exports = Employees;

@@ -17,8 +17,7 @@ import {
 } from 'react-native';
 
 import Login from './login';
-import Phones from '../phones/phones';
-import PhoneSearch from '../phones/phoneSearch';
+import Employees from '../employees/employees';
 import Users from '../users/users';
 import UserAdd from '../users/userAdd';
 import Audit from '../audit/audit';
@@ -29,7 +28,7 @@ class AppContainer extends Component {
         super(props);
 
         this.state = {
-            selectedTab: 'Phones'
+            selectedTab: 'Employees'
         }
     }
 
@@ -39,10 +38,10 @@ class AppContainer extends Component {
         <TabBarIOS style={styles.AppContainer}>
 
             <TabBarIOS.Item
-                 title="Phones"
-                 systemIcon="favorites"
-                 selected={this.state.selectedTab == 'Phones'}
-         				 onPress={()=> this.setState({selectedTab: 'Phones'})}>
+                 title="Employees"
+                 systemIcon="contacts"
+                 selected={this.state.selectedTab == 'Employees'}
+         				 onPress={()=> this.setState({selectedTab: 'Employees'})}>
 
                  <NavigatorIOS
                      style={{
@@ -50,26 +49,15 @@ class AppContainer extends Component {
                      }}
                      ref="phones"
                      initialRoute={{
-                         component: Phones,
-                         title: 'Phones',
-                         rightButtonTitle: 'Search',
-                         onRightButtonPress: () => {
-                             this.refs.phones.navigator.push({
-                                 title: "Search",
-                                 component: PhoneSearch,
-                                 rightButtonTitle: 'Cancel',
-                                 onRightButtonPress: () => {
-                                   this.refs.phones.navigator.pop()
-                                 }
-                               });
- 												}
-                     }}
+                         component: Employees,
+                         title: 'Employees'
+                    }}
                  />
              </TabBarIOS.Item>
 
              <TabBarIOS.Item
                   title="Users"
-        					systemIcon="contacts"
+        					systemIcon="more"
                   selected={this.state.selectedTab == 'Users'}
           				onPress={()=> this.setState({selectedTab: 'Users'})}>
 

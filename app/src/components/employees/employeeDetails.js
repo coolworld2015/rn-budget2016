@@ -16,7 +16,7 @@ import {
     TextInput
 } from 'react-native';
 
-class PhoneDetails extends Component {
+class EmployeeDetails extends Component {
     constructor(props){
         super(props);
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       margin: 10,
       paddingTop: 10,
-      fontWeight: "bold"      
+      fontWeight: "bold"
     },
     details: {
       fontSize: 20,
@@ -129,4 +129,4 @@ const styles = StyleSheet.create({
     }
 });
 
-module.exports = PhoneDetails;
+module.exports = EmployeeDetails;
