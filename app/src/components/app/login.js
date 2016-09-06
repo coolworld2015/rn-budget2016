@@ -95,7 +95,7 @@ class Login extends Component {
                 <Image style={styles.logo}
           				source={require('../../../logo.jpg')}
           			/>
-                <Text style={styles.heading}>RN-Base</Text>
+                <Text style={styles.heading}>RN-Budget</Text>
                 <TextInput
                     onChangeText={(text)=> this.setState({
                       username: text,
