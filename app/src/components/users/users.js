@@ -39,7 +39,7 @@ class Users extends Component {
     }
 
     getUsers(){
-       fetch('http://ui-base.herokuapp.com/api/users/get', {
+       fetch('http://ui-budget.herokuapp.com/api/users/get', {
             method: 'get',
             headers: {
               'Accept': 'application/json',
@@ -83,7 +83,7 @@ class Users extends Component {
        showProgress: true
       });
 
- 			fetch('http://ui-base.herokuapp.com/api/users/delete/', {
+ 			fetch('http://ui-budget.herokuapp.com/api/users/delete/', {
             method: 'POST',
             body: JSON.stringify({
                 id: id

@@ -37,9 +37,9 @@ class Audit extends Component {
 
       	this.getAudit();
     }
-
+ 
     getAudit(){
-       fetch('http://ui-base.herokuapp.com/api/audit/get', {
+       fetch('http://ui-budget.herokuapp.com/api/audit/get', {
             method: 'get',
             headers: {
               'Accept': 'application/json',

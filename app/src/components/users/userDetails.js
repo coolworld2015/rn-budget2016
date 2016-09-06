@@ -43,7 +43,7 @@ class UserDetails extends Component {
         showProgress: true
       });
 
- 			fetch('http://ui-base.herokuapp.com/api/users/update/', {
+ 			fetch('http://ui-budget.herokuapp.com/api/users/update/', {
             method: 'POST',
             body: JSON.stringify({
                 id: this.state.id,

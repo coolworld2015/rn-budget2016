@@ -43,7 +43,7 @@ class UserAdd extends Component {
 
       var id = (Math.random() * 1000000).toFixed();
 
- 			fetch('http://ui-base.herokuapp.com/api/users/add/', {
+ 			fetch('http://ui-budget.herokuapp.com/api/users/add/', {
             method: 'POST',
             body: JSON.stringify({
                 id: id,
