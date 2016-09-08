@@ -147,7 +147,7 @@ class UserDetails extends Component {
       <TouchableHighlight
         onPress={()=> this.updateUser()}
         style={styles.button}>
-        <Text style={styles.buttonText}>Update item</Text>
+        <Text style={styles.buttonText}>Update</Text>
       </TouchableHighlight>
 
       {errorCtrl}

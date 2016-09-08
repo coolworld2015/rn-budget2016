@@ -47,10 +47,17 @@ class AppContainer extends Component {
                      style={{
                          flex: 1
                      }}
-                     ref="phones"
+                     ref="emp"
                      initialRoute={{
                          component: Employees,
-                         title: 'Employees'
+                         title: 'Employees',
+                         rightButtonTitle: 'New',
+                         onRightButtonPress: () => {
+                             this.refs.emp.navigator.push({
+                                 title: "New user",
+                                 component: UserAdd
+                               });
+                        }
                     }}
                  />
              </TabBarIOS.Item>
@@ -69,15 +76,11 @@ class AppContainer extends Component {
                       initialRoute={{
                           component: Users,
                           title: 'Users',
-                          rightButtonTitle: 'Add',
+                          rightButtonTitle: 'New',
                           onRightButtonPress: () => {
                               this.refs.users.navigator.push({
                                   title: "New user",
-                                  component: UserAdd,
-                                  rightButtonTitle: 'Cancel',
-                                  onRightButtonPress: () => {
-                                    this.refs.users.navigator.pop();
-                                  }
+                                  component: UserAdd
                                 });
   												}
                       }}

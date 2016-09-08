@@ -13,7 +13,8 @@ import {
     ActivityIndicator,
     TabBarIOS,
     NavigatorIOS,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 
 import EmployeeDetails from './employeeDetails';
@@ -78,6 +79,20 @@ class Employees extends Component {
         this.props.navigator.push({
             title: rowData.name,
             component: EmployeeDetails,
+            rightButtonTitle: 'Delete',
+            onRightButtonPress: () => {
+              Alert.alert(
+                'Delete user',
+                'Are you sure you want to delete ' + rowData.name + '?',
+                [
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+                  {text: 'OK', onPress: () => {
+                    this.deleteUser(rowData.id);
+                    }
+                  },
+                ]
+              );
+            },
             passProps: {
                 pushEvent: rowData
             }

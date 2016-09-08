@@ -141,7 +141,7 @@ class UserAdd extends Component {
                 <TouchableHighlight
                     onPress={()=> this.addUser()}
                     style={styles.button}>
-                    <Text style={styles.buttonText}>Add item</Text>
+                    <Text style={styles.buttonText}>New</Text>
                 </TouchableHighlight>
 
                 {errorCtrl}
