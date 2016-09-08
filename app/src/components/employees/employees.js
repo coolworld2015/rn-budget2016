@@ -82,7 +82,7 @@ class Employees extends Component {
             rightButtonTitle: 'Delete',
             onRightButtonPress: () => {
               Alert.alert(
-                'Delete user',
+                'Delete employee',
                 'Are you sure you want to delete ' + rowData.name + '?',
                 [
                   {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
