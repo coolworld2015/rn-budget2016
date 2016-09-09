@@ -166,6 +166,7 @@ class Users extends Component {
 
         this.setState({
             showProgress: true,
+            serverError: false,
             resultsCount: event.nativeEvent.contentOffset.y
         });
         setTimeout(() => {this.getUsers()}, 300);

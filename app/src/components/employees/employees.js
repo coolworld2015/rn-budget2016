@@ -127,6 +127,7 @@ class Employees extends Component {
 
         this.setState({
             showProgress: true,
+            serverError: false,
             resultsCount: event.nativeEvent.contentOffset.y
         });
         setTimeout(() => {this.getPhones()}, 300);

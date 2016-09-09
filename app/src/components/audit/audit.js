@@ -37,7 +37,7 @@ class Audit extends Component {
 
       	this.getAudit();
     }
- 
+
     getAudit(){
        fetch('http://ui-budget.herokuapp.com/api/audit/get', {
             method: 'get',
@@ -109,6 +109,7 @@ class Audit extends Component {
 
         this.setState({
             showProgress: true,
+            serverError: false,
             resultsCount: event.nativeEvent.contentOffset.y
         });
         setTimeout(() => {this.getAudit()}, 300);
