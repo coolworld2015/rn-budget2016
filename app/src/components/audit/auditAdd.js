@@ -14,7 +14,9 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-    Picker
+    Picker,
+    AsyncStorage,
+    Alert
 } from 'react-native';
 
 import Users from '../users/users';
@@ -68,6 +70,23 @@ class AuditAdd extends Component {
             return 1
         }
         return 0;
+    }
+
+    localTest() {
+      var test;
+      AsyncStorage.getItem('rn.test.items')
+        .then(req => JSON.parse(req))
+        .then(json => {
+          console.log(json);
+          Alert.alert(
+            'Alert',
+            json[2].name.toString() + ' - ' + json[2].id.toString()
+          )
+        })
+        .catch(error => console.log(error))
+
+      return AsyncStorage.setItem('rn.test.items', JSON.stringify(this.state.items))
+        .then(json => console.log('ok'));
     }
 
     render(){
@@ -183,8 +202,9 @@ class AuditAdd extends Component {
  								{validCtrl}
 
                 <TouchableHighlight
+                    onPress={this.localTest.bind(this)}
                     style={styles.button}>
-                    <Text style={styles.buttonText}>Add item</Text>
+                    <Text style={styles.buttonText}>New</Text>
                 </TouchableHighlight>
 
             </View>
