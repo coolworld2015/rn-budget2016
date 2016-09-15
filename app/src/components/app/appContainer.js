@@ -64,7 +64,7 @@ class AppContainer extends Component {
 
              <TabBarIOS.Item
                   title="Users"
-        					systemIcon="more"
+        					systemIcon="downloads"
                   selected={this.state.selectedTab == 'Users'}
           				onPress={()=> this.setState({selectedTab: 'Users'})}>
 

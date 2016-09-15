@@ -57,12 +57,16 @@ class App extends Component {
 
   onLogin(){
     console.log('onLogin');
-    this.setState({isLoggedIn: true});
+    this.setState({
+      isLoggedIn: true
+    });
   }
 
   onLogOut(){
     console.log('onLogOut');
-    this.setState({isLoggedIn: false});
+    this.setState({
+      isLoggedIn: false
+    });
   }
 }
 
